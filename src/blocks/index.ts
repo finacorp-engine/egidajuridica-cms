@@ -6,6 +6,7 @@ import {
   TestimonialsListBlock,
 } from './carousels'
 import { ExpertiseBlock } from './expertise'
+import { FounderBlock } from './founder'
 import { HeroBlock } from './hero'
 import { HeroHomeBlock } from './heroHome'
 import { PhraseBlock } from './phrase'
@@ -25,6 +26,7 @@ export const pageBlocks = [
   SpecialtiesBlock,
   ExpertiseBlock,
   ServicesCarouselBlock,
+  FounderBlock,
   TeamCarouselBlock,
   SuccessStoriesCarouselBlock,
   TestimonialsListBlock,
@@ -38,6 +40,7 @@ export {
   AboutBlock,
   ContactFormBlock,
   ExpertiseBlock,
+  FounderBlock,
   HeroBlock,
   HeroHomeBlock,
   InstagramBlock,

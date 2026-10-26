@@ -44,8 +44,10 @@ export const SiteSettings: GlobalConfig = {
           label: 'Redes sociales',
           fields: [
             { name: 'whatsapp', type: 'text', label: 'WhatsApp' },
+            { name: 'facebook', type: 'text', label: 'Facebook' },
             { name: 'linkedin', type: 'text', label: 'LinkedIn' },
             { name: 'instagram', type: 'text', label: 'Instagram' },
+            { name: 'tiktok', type: 'text', label: 'TikTok' },
             { name: 'youtube', type: 'text', label: 'YouTube' },
             { name: 'linktree', type: 'text', label: 'Linktree' },
             { name: 'googleReviews', type: 'text', label: 'Google Reviews' },

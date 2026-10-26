@@ -161,6 +161,7 @@ export interface Page {
         | SpecialtiesBlock
         | ExpertiseBlock
         | ServicesCarouselBlock
+        | FounderBlock
         | TeamCarouselBlock
         | SuccessStoriesCarouselBlock
         | TestimonialsListBlock
@@ -447,15 +448,54 @@ export interface ServicesCarouselBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TeamCarouselBlock".
+ * via the `definition` "FounderBlock".
  */
-export interface TeamCarouselBlock {
-  introTitle?: string | null;
-  introText?: string | null;
-  members?: (string | TeamMember)[] | null;
+export interface FounderBlock {
+  /**
+   * Miembro del equipo del que se toman el nombre, el cargo y la foto. Si está vacío, se usa el miembro cuyo cargo contiene "Fundador".
+   */
+  member?: (string | null) | TeamMember;
+  backgroundText?: string | null;
+  subtitle?: string | null;
+  /**
+   * Déjalo vacío para usar el nombre del miembro del equipo.
+   */
+  nameOverride?: string | null;
+  /**
+   * Déjalo vacío para usar el cargo del miembro del equipo.
+   */
+  roleOverride?: string | null;
+  /**
+   * Déjala vacía para usar la foto del miembro del equipo. Se recomienda una foto vertical.
+   */
+  photoOverride?: (string | null) | Media;
+  photoLabel?: string | null;
+  /**
+   * Separa los párrafos con una línea en blanco.
+   */
+  story?: string | null;
+  quote?: string | null;
+  highlights?:
+    | {
+        value: string;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    text?: string | null;
+    /**
+     * URL externa o ruta relativa (ej. /contacto)
+     */
+    href?: string | null;
+    /**
+     * Opcional. Si se define, tiene prioridad sobre la URL.
+     */
+    page?: (string | null) | Page;
+  };
   id?: string | null;
   blockName?: string | null;
-  blockType: 'teamCarousel';
+  blockType: 'founder';
 }
 /**
  * Miembros del equipo mostrados en el carrusel de equipo.
@@ -471,6 +511,18 @@ export interface TeamMember {
   order?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamCarouselBlock".
+ */
+export interface TeamCarouselBlock {
+  introTitle?: string | null;
+  introText?: string | null;
+  members?: (string | TeamMember)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamCarousel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -725,6 +777,7 @@ export interface PagesSelect<T extends boolean = true> {
         specialties?: T | SpecialtiesBlockSelect<T>;
         expertise?: T | ExpertiseBlockSelect<T>;
         servicesCarousel?: T | ServicesCarouselBlockSelect<T>;
+        founder?: T | FounderBlockSelect<T>;
         teamCarousel?: T | TeamCarouselBlockSelect<T>;
         successStoriesCarousel?: T | SuccessStoriesCarouselBlockSelect<T>;
         testimonialsList?: T | TestimonialsListBlockSelect<T>;
@@ -888,6 +941,37 @@ export interface ExpertiseBlockSelect<T extends boolean = true> {
 export interface ServicesCarouselBlockSelect<T extends boolean = true> {
   introTitle?: T;
   services?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FounderBlock_select".
+ */
+export interface FounderBlockSelect<T extends boolean = true> {
+  member?: T;
+  backgroundText?: T;
+  subtitle?: T;
+  nameOverride?: T;
+  roleOverride?: T;
+  photoOverride?: T;
+  photoLabel?: T;
+  story?: T;
+  quote?: T;
+  highlights?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        text?: T;
+        href?: T;
+        page?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1156,8 +1240,10 @@ export interface SiteSetting {
   openingHoursDisplay?: string | null;
   googleMapsEmbedUrl?: string | null;
   whatsapp?: string | null;
+  facebook?: string | null;
   linkedin?: string | null;
   instagram?: string | null;
+  tiktok?: string | null;
   youtube?: string | null;
   linktree?: string | null;
   googleReviews?: string | null;
@@ -1244,8 +1330,10 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   openingHoursDisplay?: T;
   googleMapsEmbedUrl?: T;
   whatsapp?: T;
+  facebook?: T;
   linkedin?: T;
   instagram?: T;
+  tiktok?: T;
   youtube?: T;
   linktree?: T;
   googleReviews?: T;
